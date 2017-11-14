@@ -1,0 +1,28 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data=pd.read_csv('wages_hours.csv')
+#these shows that columns are seperated by tabs instead on commas, this is a problem
+print data.head()
+
+#data is seperated by \t so we need to deliniate that as seen below
+data=pd.read_csv('wages_hours.csv', sep='\t')
+#The results are much better
+print data.head()
+
+#to extract and work with individual columns, create a new variable
+data2=data[['AGE', 'RATE']]
+print data2.head()
+
+#to sort the data by age in order
+data_sorted=data2.sort_values(['AGE'])
+print data_sorted.head()
+
+# now the 0, 1, 2 etc column is the index which will automatically be the x axis
+# so to change that to AGE instead so a graph can be plotted:
+#now 'AGE' is x field and 'RATE' is y field
+data_sorted.set_index('AGE', inplace=True)
+print data_sorted
+
+data_sorted.plot() # var.plot plots the data in data variable
+plt.show()  # plt.show displays the data plotted
